@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Velvet Avenue — AI Marketplace</title>
+<link rel="stylesheet" href="/static/css/app.css">
+</head>
+<body>
+<div class="bg-shape shape1"></div><div class="bg-shape shape2"></div>
+<header class="topbar">
+  <div class="brand"><span class="logo">VA</span><span>Velvet <b>Avenue</b></span></div>
+  <nav>
+    <button class="navbtn" onclick="showHome()">Home</button>
+    <button class="navbtn" onclick="openCart()">🛒 Cart <span id="cartCount">0</span></button>
+    <button class="navbtn" id="loginNav" onclick="openAuth()">Login</button>
+    <button class="navbtn hidden" id="accountNav" onclick="showAccount()">Account</button>
+    <button class="navbtn sellerNav hidden" id="sellerNav" onclick="showSeller()">Seller Center</button>
+    <button class="navbtn adminNav hidden" id="adminNav" onclick="showAdmin()">Admin</button>
+  </nav>
+</header>
+
+<main class="container">
+<section id="homeView">
+  <section class="hero">
+    <div class="heroGlow"></div>
+    <div class="heroContent">
+      <span class="eyebrow">✦ AI-POWERED MULTI-VENDOR MARKETPLACE</span>
+      <h1>Temukan produk terbaik dari <span>berbagai penjual.</span></h1>
+      <p>Anda cukup menjelaskan kebutuhan. AI membantu memahami, membandingkan, dan menemukan pilihan yang paling sesuai.</p>
+      <div class="searchBox">
+        <input id="searchInput" placeholder="Contoh: sepatu Nike size 42, budget 1 juta, rating 4,7, paling murah">
+        <button onclick="aiSearch()">Cari dengan AI ✦</button>
+      </div>
+      <div class="quick">
+        <button onclick="quickSearch('sepatu Nike ukuran 42 maksimal 1 juta rating 4.7 paling murah')">Sepatu Nike</button>
+        <button onclick="quickSearch('laptop untuk coding maksimal 12 juta')">Laptop Coding</button>
+      </div>
+      <small id="searchStatus"></small>
+    </div>
+    <div class="heroArt"><div class="orb">✦</div><div class="miniCard">AI Match<br><strong>98%</strong></div><div class="miniCard two">Seller<br><strong>✓ Verified</strong></div></div>
+  </section>
+
+  <section id="recommendation" class="recommend hidden"></section>
+  <section class="sectionTitle"><div><span class="eyebrow dark">DISCOVER</span><h2>Produk yang mungkin cocok</h2></div></section>
+  <section id="products" class="grid"></section>
+</section>
+
+<section id="accountView" class="panel hidden"></section>
+<section id="sellerView" class="panel hidden">
+  <div class="panelTitle"><div><span class="eyebrow dark">SELLER CENTER</span><h2>Kelola toko</h2></div></div>
+  <div class="two">
+    <div class="inner panel"><h3>Tambah Produk</h3>
+      <form id="productForm" onsubmit="createProduct(event)">
+        <input name="name" placeholder="Nama produk" required><input name="brand" placeholder="Brand">
+        <input name="category" placeholder="Kategori, contoh: sepatu" required><div class="formGrid"><input name="size" placeholder="Ukuran"><input name="color" placeholder="Warna"></div>
+        <div class="formGrid"><input name="price" type="number" placeholder="Harga" required><input name="stock" type="number" placeholder="Stok" required></div>
+        <div class="formGrid"><input name="weight_gram" type="number" placeholder="Berat (gram)"><input name="sku" placeholder="SKU"></div>
+        <input name="discount_percent" type="number" step="0.1" placeholder="Diskon %"><input name="image_url" placeholder="URL gambar">
+        <textarea name="description" placeholder="Deskripsi produk"></textarea><button>+ Tambah Produk</button>
+      </form>
+    </div>
+    <div class="inner panel"><h3>Produk Saya</h3><div id="sellerProducts"></div></div>
+  </div>
+  <div class="inner panel"><h3>Pesanan Toko</h3><div id="sellerOrders"></div></div>
+</section>
+
+<section id="adminView" class="panel hidden">
+  <span class="eyebrow dark">ADMIN DASHBOARD</span><h2>Marketplace Overview</h2><div id="adminStats" class="stats"></div>
+  <div class="notice">Moderasi, seller verification, laporan, dispute, fraud detection, dan payout dapat menjadi modul production berikutnya.</div>
+</section>
+</main>
+
+<div id="authModal" class="modal hidden"><div class="modalBox"><button class="close" onclick="closeAuth()">×</button><div id="authBody"></div></div></div>
+<div id="cartModal" class="modal hidden"><div class="modalBox wide"><button class="close" onclick="closeCart()">×</button><h2>🛒 Keranjang</h2><div id="cartBody"></div></div></div>
+<div id="checkoutModal" class="modal hidden"><div class="modalBox wide"><button class="close" onclick="closeCheckout()">×</button><h2>Checkout</h2><div id="checkoutBody"></div></div></div>
+<div id="toast"></div>
+<script src="/static/js/app.js"></script>
+</body></html>
